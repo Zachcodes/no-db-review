@@ -25,12 +25,6 @@ export default class Dog extends Component {
     this.setState({ [name]: value });
   };
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.dog.rating !== this.props.dog.rating) {
-      this.setState({ rating: this.props.dog.rating });
-    }
-  }
-
   render() {
     let { dog } = this.props;
     let { editing, rating } = this.state;
@@ -40,7 +34,7 @@ export default class Dog extends Component {
         {editing ? (
           <input value={rating} onChange={this.handleChange} name="rating" />
         ) : (
-          <p>rating: {rating}</p>
+          <p>rating: {dog.rating}</p>
         )}
 
         {editing ? (

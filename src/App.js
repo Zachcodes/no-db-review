@@ -55,21 +55,22 @@ class App extends Component {
       .catch(err => console.log('err', err));
   };
 
-  getDogImage = () => {
-    axios
-      .get('https://dog.ceo/api/breeds/image/random')
-      .then(res => {
-        let { message } = res.data;
-        this.setState({ dogImage: message });
-      })
-      .catch(err => console.log(err));
+  handleChange = e => {
+    let { name, value } = e.target;
+    console.log('name', name);
+    console.log('value', value);
+    this.setState({ [name]: value });
   };
 
   render() {
     return (
       <div className="App">
-        <RandomDogImage image={this.state.dogImage} addDog={this.addDog} />
-        <button onClick={this.getDogImage}>Get Dog Image</button>
+        <input
+          value={this.state.dogImage}
+          onChange={this.handleChange}
+          name="dogImage"
+        />
+        <button onClick={this.addDog}>Add Favorite Dog</button>
         {this.state.favoriteDogs.map(dog => {
           return (
             <Dog

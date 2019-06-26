@@ -14,6 +14,8 @@ module.exports = {
     res.status(200).send(dogs);
   },
   addDog(req, res) {
+    // req.body will look like this. Refer to App.js to see the way that the front end passed it
+    // { image: 'someimageurl'}
     let { image } = req.body;
     let newDog = {
       image,

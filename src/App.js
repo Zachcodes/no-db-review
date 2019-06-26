@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import RandomDogImage from './components/RandomDogImage';
 import Dog from './components/Dog';
 import axios from 'axios';
 
@@ -45,6 +44,7 @@ class App extends Component {
       .catch(err => console.log('err no delete', err));
   };
 
+  // This is the only method that will pass a body in this application. That becomes req.body in the server. On an axios request, the second argument is an object that will become the body of the request.
   addDog = () => {
     axios
       .post('/api/dogs', { image: this.state.dogImage })
@@ -57,19 +57,19 @@ class App extends Component {
 
   handleChange = e => {
     let { name, value } = e.target;
-    console.log('name', name);
-    console.log('value', value);
     this.setState({ [name]: value });
   };
 
   render() {
     return (
       <div className="App">
+        {/* We need to be able to edit the dogImage value on state which is what this input is doing */}
         <input
           value={this.state.dogImage}
           onChange={this.handleChange}
           name="dogImage"
         />
+        {/* Once the user has selected their image and updated state, they need to be able to click a button to add that dog image to their favorites array on the server. this button will invoke a function that will kick off a post request to our server */}
         <button onClick={this.addDog}>Add Favorite Dog</button>
         {this.state.favoriteDogs.map(dog => {
           return (
